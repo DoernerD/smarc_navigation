@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Particle module for SLAM-based particle filter to detect underwater docking station.
 """
