@@ -15,10 +15,15 @@ Panels:
         - /DS Odom1/Shape1
         - /DS Odom1/Covariance1
         - /DS PoseArray1
+        - /Cam_Forward1
+        - /Cam_Port1
+        - /Cam_Starboard1
         - /Perception Pose1
         - /Perception Pose1/Status1
+        - /Image1
+        - /Image1/Status1
       Splitter Ratio: 0.6852940917015076
-    Tree Height: 622
+    Tree Height: 423
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -35,9 +40,10 @@ Panels:
     Name: Views
     Splitter Ratio: 0.5
   - Class: rviz/Time
+    Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: Cam_Forward
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -65,19 +71,34 @@ Visualization Manager:
       Value: true
     - Class: rviz/TF
       Enabled: true
-      Filter (blacklist): ""
-      Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: false
-      Marker Alpha: 1
+        gt/sam/base_link:
+          Value: true
+        map:
+          Value: true
+        sam/imu_link:
+          Value: true
+        sam/imu_link_ned:
+          Value: true
+        sam/sbg_link:
+          Value: true
+        sam/sbg_link_ned:
+          Value: true
+        utm:
+          Value: true
+        world_ned:
+          Value: true
       Marker Scale: 2
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        utm:
+          map:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -118,7 +139,6 @@ Visualization Manager:
       Keep: 1
       Name: SAM Odom
       Position Tolerance: 0.10000000149011612
-      Queue Size: 10
       Shape:
         Alpha: 1
         Axes Length: 0.5
@@ -153,7 +173,6 @@ Visualization Manager:
       Keep: 1
       Name: DS Odom
       Position Tolerance: 0.10000000149011612
-      Queue Size: 10
       Shape:
         Alpha: 1
         Axes Length: 1
@@ -177,7 +196,6 @@ Visualization Manager:
       Head Length: 0.07000000029802322
       Head Radius: 0.029999999329447746
       Name: SAM PoseArray
-      Queue Size: 10
       Shaft Length: 0.23000000417232513
       Shaft Radius: 0.009999999776482582
       Shape: Axes
@@ -194,7 +212,6 @@ Visualization Manager:
       Head Length: 0.07000000029802322
       Head Radius: 0.029999999329447746
       Name: DS PoseArray
-      Queue Size: 10
       Shaft Length: 0.23000000417232513
       Shaft Radius: 0.009999999776482582
       Shape: Axes
@@ -202,7 +219,7 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Class: rviz/Image
-      Enabled: false
+      Enabled: true
       Image Topic: /sam/payload/cam_forward/image_raw
       Max Value: 1
       Median window: 5
@@ -212,9 +229,9 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: compressed
       Unreliable: false
-      Value: false
+      Value: true
     - Class: rviz/Image
-      Enabled: false
+      Enabled: true
       Image Topic: /sam/payload/cam_port/image_raw
       Max Value: 1
       Median window: 5
@@ -224,9 +241,9 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: compressed
       Unreliable: false
-      Value: false
+      Value: true
     - Class: rviz/Image
-      Enabled: false
+      Enabled: true
       Image Topic: /sam/payload/cam_starboard/image_raw
       Max Value: 1
       Median window: 5
@@ -236,9 +253,9 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: compressed
       Unreliable: false
-      Value: false
+      Value: true
     - Class: rviz/Image
-      Enabled: true
+      Enabled: false
       Image Topic: /sam/payload/cam_forward/perception/image_pose
       Max Value: 1
       Median window: 5
@@ -248,9 +265,9 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rviz/Image
-      Enabled: true
+      Enabled: false
       Image Topic: /sam/payload/cam_starboard/perception/image_pose
       Max Value: 1
       Median window: 5
@@ -260,9 +277,9 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rviz/Image
-      Enabled: true
+      Enabled: false
       Image Topic: /sam/payload/cam_port/perception/image_pose
       Max Value: 1
       Median window: 5
@@ -272,7 +289,7 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
@@ -297,7 +314,6 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: DS Map Frame
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
@@ -328,7 +344,6 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: SAM Map Frame
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
@@ -359,7 +374,6 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Current Waypoint
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
@@ -390,11 +404,22 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Perception Pose
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Axes
       Topic: /sam/perception/estimated_pose
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /sam/payload/cam_forward/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: compressed
       Unreliable: false
       Value: true
   Enabled: true
@@ -431,7 +456,6 @@ Visualization Manager:
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Field of View: 0.7853981852531433
       Focal Point:
         X: -10.371514320373535
         Y: -7.597874164581299
@@ -443,6 +467,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.5047956705093384
       Target Frame: map
+      Value: Orbit (rviz)
       Yaw: 3.708509922027588
     Saved: ~
 Window Geometry:
@@ -457,13 +482,15 @@ Window Geometry:
   Height: 1359
   Hide Left Dock: false
   Hide Right Dock: false
+  Image:
+    collapsed: false
   Perception Forward:
     collapsed: false
   Perception Port:
     collapsed: false
   Perception Starboard:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000002f9fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000001f5000002f9000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c000002610000000100000198000002f9fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007301000001f5000002f9000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000792000001b2fc0100000004fc0000000000000224000000a000fffffffa000000000200000002fb0000001e00500065007200630065007000740069006f006e00200050006f007200740100000000ffffffff0000001600fffffffb0000001000430061006d005f0050006f00720074010000003d000002170000001600fffffffc0000022a000003a4000000bb00fffffffa000000000200000002fb0000002400500065007200630065007000740069006f006e00200046006f007200770061007200640100000000ffffffff0000001600fffffffb0000001600430061006d005f0046006f00720077006100720064010000003d000002170000001600fffffffc000005d4000001be000000c600fffffffa000000000200000002fb0000002800500065007200630065007000740069006f006e002000530074006100720062006f0061007200640100000000ffffffff0000001600fffffffb0000001a00430061006d005f00530074006100720062006f006100720064010000003d000002170000001600fffffffb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007920000003efc0100000002fb0000000800540069006d0065010000000000000792000003bc00fffffffb0000000800540069006d0065010000000000000450000000000000000000000498000002f900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000002f9fc0200000010fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000001f500000232000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d006100670065010000042d000000c10000000000000000fb0000000a0049006d006100670065000000042d000000c10000000000000000fb0000000a0049006d006100670065010000042d000000c10000000000000000fb0000000a0049006d006100670065000000042d000000c10000000000000000fb0000000a0049006d006100670065000000042d000000c10000000000000000fb0000000a0049006d006100670065000000042d000000c10000000000000000fb0000000a0049006d006100670065010000042d000000c10000000000000000fb0000000a0049006d006100670065010000042d000000c10000001600ffffff0000000100000198000002f9fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007301000001f5000002f9000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000792000001b2fc0100000004fc0000000000000224000000a000fffffffa000000010200000002fb0000001e00500065007200630065007000740069006f006e00200050006f007200740100000000ffffffff0000001600fffffffb0000001000430061006d005f0050006f00720074010000003d000002170000001600fffffffc0000022a000003a4000000bb00fffffffa000000010200000002fb0000002400500065007200630065007000740069006f006e00200046006f007200770061007200640100000000ffffffff0000001600fffffffb0000001600430061006d005f0046006f00720077006100720064010000003d000002170000001600fffffffc000005d4000001be000000c600fffffffa000000010200000002fb0000002800500065007200630065007000740069006f006e002000530074006100720062006f0061007200640100000000ffffffff0000001600fffffffb0000001a00430061006d005f00530074006100720062006f006100720064010000003d000002170000001600fffffffb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007920000003efc0100000002fb0000000800540069006d0065010000000000000792000002eb00fffffffb0000000800540069006d0065010000000000000450000000000000000000000498000002f900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -473,5 +500,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1938
-  X: 148
-  Y: 66
+  X: 272
+  Y: 78
